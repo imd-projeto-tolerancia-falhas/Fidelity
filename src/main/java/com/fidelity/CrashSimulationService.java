@@ -15,11 +15,18 @@ public class CrashSimulationService {
     @Value("${crash.probability:0.02}")
     private volatile double probability;
 
+    @Value("${fail.mode:true}")
+    private boolean failMode;
+
     public void runCrash(){
-        if (ThreadLocalRandom.current().nextDouble() < probability){
-            log.warn("Crashing service");
-            System.exit(0);
+        System.out.println(failMode);
+        if(failMode){
+            if (ThreadLocalRandom.current().nextDouble() < probability){
+                log.warn("Crashing service");
+                System.exit(0);
+            }
         }
+
     }
 
 }
