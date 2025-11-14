@@ -1,12 +1,15 @@
 package com.fidelity;
 
 import com.fidelity.dto.BonusRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class BonusService {
+    Logger log = LoggerFactory.getLogger(BonusService.class);
 
     private final CrashSimulationService crashService;
 
@@ -21,6 +24,7 @@ public class BonusService {
         Integer currentBonus = bonusMap.getOrDefault(request.user(), 0);
         Integer newTotalBonus = currentBonus + request.bonus();
         bonusMap.put(request.user(), newTotalBonus);
+        log.info("Bonus added for {}: {}", request.user(), newTotalBonus);
         return newTotalBonus;
     }
 }
