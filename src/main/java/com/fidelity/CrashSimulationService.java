@@ -19,7 +19,6 @@ public class CrashSimulationService {
     private boolean failMode;
 
     public void runCrash(){
-        System.out.println(failMode);
         if(failMode){
             if (ThreadLocalRandom.current().nextDouble() < probability){
                 log.warn("Crashing service");
